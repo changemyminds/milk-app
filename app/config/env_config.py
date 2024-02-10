@@ -8,6 +8,7 @@ class EnvConifg:
     PRIVATE_GROUP_ID: str = os.getenv('PRIVATE_GROUP_ID')
     LINE_ACCESS_TOKEN: str = os.getenv('LINE_ACCESS_TOKEN')
     LINE_SECRET: str = os.getenv('LINE_SECRET')
+    LINE_NOTIFY_TOKEN: str = os.getenv('LINE_NOTIFY_TOKEN')
     POSTGRES_USER: str = os.getenv('POSTGRES_USER')
     POSTGRES_PASSWORD: str = os.getenv('POSTGRES_PASSWORD')
     POSTGRES_SERVER: str = os.getenv('POSTGRES_SERVER')
