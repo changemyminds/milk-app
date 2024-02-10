@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: milk-app-deploy
+  namespace: default
+  labels:
+    app: milk-app-deploy
+spec:
+  selector:
+    matchLabels:
+      app: milk-app-deploy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: milk-app-deploy
+    spec:
+      containers:
+        - name: milk-app
+          image: darrenchange/milk-app:latest
+          resources:
+            requests:
+              cpu: 200m
+              memory: 500Mi
+            limits:
+              cpu: 200m
+              memory: 500Mi
+          ports:
+            - containerPort: 5000
+              name: deploy-port
+          env:
+            - name: PRIVATE_GROUP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: PRIVATE_GROUP_ID
+            - name: LINE_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: LINE_ACCESS_TOKEN
+            - name: LINE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: LINE_SECRET
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: POSTGRES_SERVER
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: POSTGRES_DB                                               
+      restartPolicy: Always
