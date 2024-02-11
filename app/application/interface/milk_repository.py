@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List
-from domain.milk_entity import MilkEntity
+from app.domain.milk_entity import MilkEntity
 
 
 class MilkRepository:

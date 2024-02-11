@@ -3,12 +3,11 @@ from flask import Blueprint, request
 import json
 from linebot import LineBotApi, WebhookHandler
 from linebot.models import TextSendMessage
-from application.usecase.parse_line_message import ParseLineMessageInput, ParseLineMessageOutput
+from app.application.usecase.parse_line_message import ParseLineMessageInput, ParseLineMessageOutput
+from app.config.env_config import env_config
 from . import parse_line_message_usecase
-
 from typing import List, Optional
 from pydantic import BaseModel
-from config.env_config import env_config
 
 linebot_bp = Blueprint('linebot_bp', __name__)
 

@@ -3,11 +3,11 @@ import re
 
 class LineMessageParser:
     def parse_breast_milk_record(self, data):
-        time = self.__extract_timeformat(data)
-        cc = self.__extract_cc(data)
+        time = self.extract_timeformat(data)
+        cc = self.extract_cc(data)
         return time, cc
 
-    def __extract_timeformat(self, data):
+    def extract_timeformat(self, data):
         # attempt to match time range
         time_match_range = re.search(
             r'(\d{1,2}:?\d{2})\s*-\s*(\d{1,2}:?\d{2})', data)
@@ -37,11 +37,16 @@ class LineMessageParser:
         else:
             raise ValueError("Invalid time format")
 
-    def __extract_cc(self, data):
-        cc_pattern = re.compile(r'(\d+)(\s*cc)?\s*$')
+    def extract_cc(self, data):
+        # only time, not include the cc
+        if re.match(r'^\d{1,2}:?\d{2}\s*$', data):
+            raise ValueError("The cc format is not correct")        
+
+        # check match cc      
+        cc_pattern = re.compile(r'(\d+)\s*(cc)?\s*$', re.IGNORECASE)
         cc_match = cc_pattern.search(data)
         if cc_match:
             cc_amount = cc_match.group(1)
-            return f"{cc_amount}"
+            return int(cc_amount)
 
         raise ValueError("The cc format is not correct")

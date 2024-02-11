@@ -1,8 +1,8 @@
 from datetime import datetime
 import logging
 from pydantic import BaseModel
-from application.interface.message_notify import MessageNotify
-from application.interface.milk_repository import MilkRepository
+from app.application.interface.message_notify import MessageNotify
+from app.application.interface.milk_repository import MilkRepository
 
 
 class CountDayMilkInput(BaseModel):

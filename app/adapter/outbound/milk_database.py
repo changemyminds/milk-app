@@ -4,8 +4,8 @@ import logging
 from typing import List
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import sessionmaker
-from application.interface.milk_repository import MilkRepository
-from domain.milk_entity import MilkEntity
+from app.application.interface.milk_repository import MilkRepository
+from app.domain.milk_entity import MilkEntity
 from . import Base
 
 class Milk(Base):

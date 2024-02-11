@@ -1,7 +1,7 @@
 from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
-from adapter.inbound.controller import linebot_bp
-from adapter.inbound.scheduler import count_day_milk_job
+from app.adapter.inbound.controller import linebot_bp
+from app.adapter.inbound.scheduler import count_day_milk_job
 import logging
 
 log_format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

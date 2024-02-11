@@ -2,7 +2,7 @@
 
 import logging
 import requests
-from application.interface.message_notify import MessageNotify
+from app.application.interface.message_notify import MessageNotify
 
 
 class LineMessageNotify(MessageNotify):
