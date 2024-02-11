@@ -1,6 +1,6 @@
 from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
-from app.adapter.inbound.controller import linebot_bp
+from app.adapter.inbound.line_controller import linebot_bp
 from app.adapter.inbound.scheduler import count_day_milk_job
 import logging
 
