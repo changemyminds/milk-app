@@ -1,12 +1,14 @@
 from datetime import datetime
 import logging
+from zoneinfo import ZoneInfo
 from pydantic import BaseModel
 from app.application.interface.message_notify import MessageNotify
 from app.application.interface.milk_repository import MilkRepository
 
 
 class CountDayMilkInput(BaseModel):
-    day: datetime
+    previous_day: datetime
+    now_day: datetime
 
 
 class CountDayMilkOutput(BaseModel):
@@ -18,15 +20,19 @@ class CountDayMilkUseCase:
         self.milk_repository = milk_repository
         self.message_notify = message_notify
 
-    def execute(self, input: CountDayMilkInput) -> CountDayMilkOutput:
-        day_start = datetime.combine(input.day, datetime.min.time())
-        day_end = datetime.combine(input.day, datetime.max.time())
-        milks = self.milk_repository.get_milks_range(day_start, day_end)
-        logging.info(milks)
+    def execute(self, input: CountDayMilkInput) -> CountDayMilkOutput:         
+        milks = self.milk_repository.get_milks_range(input.previous_day, input.now_day)
         total_cc = sum([milk.cc for milk in milks])
 
         # line notify
-        day_format = input.day.strftime("%Y/%m/%d %H:%M:%S")
-        message = f"\n時間: {day_format}\n總筆數: {len(milks)}筆\n總cc數: {total_cc}cc"
+        date_in_asia = input.previous_day.astimezone(ZoneInfo("Asia/Taipei"))
+        date_format = date_in_asia.strftime("%Y-%m-%d")
+
+        messages = []
+        messages.append(f"紀錄時間: {date_format}")
+        messages.append(f"總筆數: {len(milks)}")
+        messages.append(f"總cc數: {total_cc}")
+        message = '\n' + '\n'.join(messages)
         self.message_notify.notify(message)
+
         return CountDayMilkOutput(message=message)
