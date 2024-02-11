@@ -21,3 +21,7 @@ start-infrastructure:
 .PHONY: stop-infrastructure
 stop-infrastructure:
 	docker-compose -f $(COMPOSE_FILE) down
+
+.PHONY: test
+test:
+	python -m unittest discover -s test
