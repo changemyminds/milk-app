@@ -44,6 +44,11 @@ spec:
                 secretKeyRef:
                   name: milk-secret
                   key: LINE_SECRET
+            - name: LINE_NOTIFY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: LINE_NOTIFY_TOKEN                  
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:

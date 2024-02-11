@@ -29,9 +29,14 @@ class CountDayMilkUseCase:
         date_format = date_in_asia.strftime("%Y-%m-%d")
 
         messages = []
-        messages.append(f"紀錄時間: {date_format}")
-        messages.append(f"總筆數: {len(milks)}")
-        messages.append(f"總cc數: {total_cc}")
+        messages.append(f"紀錄時間: {date_format} 🕐")
+        count = len(milks)
+        if count > 0:
+            messages.append(f"詳細資訊如下:")
+            for milk in milks:
+                messages.append(f"{milk.time_range} - {milk.cc}cc")
+        messages.append(f"總筆數: {count} ✏️")
+        messages.append(f"總cc數: {total_cc} 🍼")
         message = '\n' + '\n'.join(messages)
         self.message_notify.notify(message)
 

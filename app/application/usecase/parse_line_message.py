@@ -35,5 +35,14 @@ class ParseLineMessageUseCase:
         # add milk record
         self.milk_repository.add(entity=MilkEntity(
             id=0, time_range=time, cc=cc, create_time=create_time))
+ 
+        message = self.__create_success_message(time, cc)
 
-        return ParseLineMessageOutput(message=f"時間: {time}, cc數: {cc} - 紀錄成功!")
+        return ParseLineMessageOutput(message=message)
+
+    def __create_success_message(self, time: str, cc: int) -> str:
+        messages = []
+        messages.append(f"時間: {time} 🕐")
+        messages.append(f"cc數: {cc} 🍼")
+        messages.append(f"狀態: 紀錄成功 🎉")
+        return "\n".join(messages)
