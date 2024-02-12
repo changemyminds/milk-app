@@ -25,3 +25,8 @@ stop-infrastructure:
 .PHONY: test
 test:
 	python -m unittest discover -s test
+
+# please make sure you have installed release-it tool
+.PHONY: release
+release:
+	@release-it
