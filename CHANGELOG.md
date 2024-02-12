@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/changemyminds/milk-app/compare/v1.0.6...v1.0.7) (2024-02-12)
+
+
+### 🔨 Refactor code
+
+* refactor scheduler ([ad2aec7](https://github.com/changemyminds/milk-app/commit/ad2aec7e15a48a78ecc474679b954249d6a72868))
+
 ## [1.0.6](https://github.com/changemyminds/milk-app/compare/v1.0.5...v1.0.6) (2024-02-12)
 
 
