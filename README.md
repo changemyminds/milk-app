@@ -10,5 +10,5 @@ npm install --global release-it @release-it/conventional-changelog
 export GITHUB_TOKEN={YOUR_GITHUB_TOKEN}
 
 # run release-it tool to create a tag and release page
-release-it
+make release
 ```
