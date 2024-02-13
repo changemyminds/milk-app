@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/changemyminds/milk-app/compare/v1.0.7...v1.1.0) (2024-02-13)
+
+
+### ✨ New feature
+
+* **log:** updated the log format ([1a7f18f](https://github.com/changemyminds/milk-app/commit/1a7f18ffc659dd9833d329215cf3e424c563f173))
+* **tz:** updated the timezone as pod env ([52467af](https://github.com/changemyminds/milk-app/commit/52467aff834b73d31485010c594e4b0b4de948a0))
+
+
+### 🐛 Bugfix
+
+* **bug:** fixed unexpected message format ([82ef9f9](https://github.com/changemyminds/milk-app/commit/82ef9f96cef0f70d2c239005a5a903e0c6c0ca10))
+
 ## [1.0.7](https://github.com/changemyminds/milk-app/compare/v1.0.6...v1.0.7) (2024-02-12)
 
 
