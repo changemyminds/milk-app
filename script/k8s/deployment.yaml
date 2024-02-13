@@ -68,5 +68,10 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: milk-secret
-                  key: POSTGRES_DB                                               
+                  key: POSTGRES_DB
+            - name: TZ
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: TZ                                
       restartPolicy: Always

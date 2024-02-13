@@ -12,7 +12,7 @@ docker-build:
 
 .PHONY: docker-run
 docker-run:
-	docker run --network=host -p 5000:5000 --env-file $(ENV_FILE) $(IMAGE_NAME)
+	docker run --network=host -p 5000:5000 --name=milk-app --env-file $(ENV_FILE) $(IMAGE_NAME)
 
 .PHONY: start-infrastructure
 start-infrastructure:

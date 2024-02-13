@@ -60,6 +60,7 @@ jobs:
           --from-literal=POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" \
           --from-literal=POSTGRES_SERVER="${{ secrets.POSTGRES_SERVER }}" \
           --from-literal=POSTGRES_DB="${{ secrets.POSTGRES_DB }}" \
+          --from-literal=TZ="${{ secrets.TZ }}" \
           --dry-run=client -o yaml | kubectl apply -f -
     
     - name: Deploy Application to Kubernetes

@@ -60,7 +60,7 @@ def callback():
     try:
         handler.handle(body, signature)
     except InvalidSignatureError as e:
-        logging.error(e)
+        logging.exception(e)
 
     return 'OK'
 

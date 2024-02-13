@@ -17,6 +17,5 @@ app.register_blueprint(linebot_bp)
 # scheduler run
 logging.info("scheduler run")
 scheduler = BackgroundScheduler()
-scheduler.add_job(count_day_milk_job, 'cron', day='*',
-                  hour=0, minute=1, timezone='Asia/Taipei')
+scheduler.add_job(count_day_milk_job, 'cron', day='*', hour=0, minute=1)
 scheduler.start()

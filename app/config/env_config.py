@@ -13,6 +13,7 @@ class EnvConifg:
     POSTGRES_PASSWORD: str = os.getenv('POSTGRES_PASSWORD')
     POSTGRES_SERVER: str = os.getenv('POSTGRES_SERVER')
     POSTGRES_DB: str = os.getenv('POSTGRES_DB')
+    TZ: str = os.getenv('TZ', 'UTC')
 
     def get_db_connection(self):
         return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}/{self.POSTGRES_DB}"

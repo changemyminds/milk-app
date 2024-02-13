@@ -8,6 +8,7 @@ from app.application.interface.milk_repository import MilkRepository
 
 class CountDayMilkInput(BaseModel):
     previous_day: datetime
+    previous_day_tz: datetime
     now_day: datetime
 
 
@@ -25,8 +26,7 @@ class CountDayMilkUseCase:
         total_cc = sum([milk.cc for milk in milks])
 
         # line notify
-        date_in_asia = input.previous_day.astimezone(ZoneInfo("Asia/Taipei"))
-        date_format = date_in_asia.strftime("%Y-%m-%d")
+        date_format = input.previous_day_tz.strftime("%Y-%m-%d")
 
         messages = []
         messages.append(f"紀錄時間: {date_format} 🕐")
