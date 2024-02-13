@@ -9,12 +9,12 @@ from . import count_day_milk_usecase
 
 def count_day_milk_job():
     try:
-        now = datetime.now()
-        midnight_tz = datetime.combine(now.date(), time(0, 0))
+        tz_info = ZoneInfo(env_config.TIMEZONE)
+        now = datetime.now(tz_info)
+        midnight_tz = datetime.combine(now.date(), time(0, 0), tz_info)
         midnight = midnight_tz.astimezone(ZoneInfo('UTC'))
         previous_midnight = midnight - timedelta(days=1)
-        previous_midnight_tz = previous_midnight.astimezone(
-            ZoneInfo(env_config.TZ))
+        previous_midnight_tz = previous_midnight.astimezone(tz_info)
         logging.info(
             f"midnight: {midnight}, previous_midnight: {previous_midnight}, previous_midnight_tz: {previous_midnight_tz}")
         count_day_milk_usecase.execute(CountDayMilkInput(

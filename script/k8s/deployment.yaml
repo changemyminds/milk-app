@@ -69,9 +69,9 @@ spec:
                 secretKeyRef:
                   name: milk-secret
                   key: POSTGRES_DB
-            - name: TZ
+            - name: TIMEZONE
               valueFrom:
                 secretKeyRef:
                   name: milk-secret
-                  key: TZ                                
+                  key: TIMEZONE                                
       restartPolicy: Always
