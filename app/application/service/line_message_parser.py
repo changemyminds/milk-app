@@ -38,11 +38,18 @@ class LineMessageParser:
             raise ValueError("Invalid time format")
 
     def extract_cc(self, data):
-        # only time, not include the cc
-        if re.match(r'^\d{1,2}:?\d{2}\s*$', data):
-            raise ValueError("The cc format is not correct")        
+        # Check for correct time range format
+        time_range_pattern = re.compile(
+            r'^\d{1,2}:?\d{2}\s*-\s*\d{1,2}:?\d{2}\s*$')
+        if time_range_pattern.match(data):
+            raise ValueError(
+                "Time range format is correct, but this method is for extracting cc")
 
-        # check match cc      
+        # Check for simple time format without "cc", raise error as before
+        if re.match(r'^\d{1,2}:?\d{2}\s*$', data):
+            raise ValueError("The cc format is not correct")
+
+        # check match cc
         cc_pattern = re.compile(r'(\d+)\s*(cc)?\s*$', re.IGNORECASE)
         cc_match = cc_pattern.search(data)
         if cc_match:

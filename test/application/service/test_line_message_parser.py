@@ -5,7 +5,7 @@ from app.application.service.line_message_parser import LineMessageParser
 
 class TestLineMessageParser(unittest.TestCase):
     def test_parse_breast_milk_record(self):
-        line_message_parser = LineMessageParser()         
+        line_message_parser = LineMessageParser()
         test_cases = [
             ("12:40-13:00 10cc", ("12:40-13:00", 10)),
             ("12:40-1300 11cc", ("12:40-13:00", 11)),
@@ -32,7 +32,8 @@ class TestLineMessageParser(unittest.TestCase):
             with self.subTest(input=input_str, expected=expected):
                 if isinstance(expected, type) and issubclass(expected, Exception):
                     with self.assertRaises(expected):
-                        result, cc = line_message_parser.parse_breast_milk_record(input_str)
+                        result, cc = line_message_parser.parse_breast_milk_record(
+                            input_str)
                         print(cc)
                 else:
                     result = line_message_parser.parse_breast_milk_record(
@@ -43,7 +44,7 @@ class TestLineMessageParser(unittest.TestCase):
         line_message_parser = LineMessageParser()
         cc = 10
         test_cases = [
-            ("12:40-13:00 10cc",cc),
+            ("12:40-13:00 10cc", cc),
             ("12:40-1300 10cc", cc),
             ("12:40-1300 10cc", cc),
             ("12:40-1300 10cc", cc),
@@ -62,6 +63,19 @@ class TestLineMessageParser(unittest.TestCase):
             ("1240   ", ValueError),
             ("12:40", ValueError),
             ("12:40     ", ValueError),
+            # error test case: 14:30-14:34 | 1434
+            ("14:30-14:34", ValueError),
+            ("14:30 - 14:34", ValueError),
+            ("14:30-  14:34    ", ValueError),
+            ("14:30-1434", ValueError),
+            ("14:30   -1434", ValueError),
+            ("14:30  - 1434  ", ValueError),
+            ("1430-14:34", ValueError),
+            ("1430  -   14:34", ValueError),
+            ("1430  -   14:34  ", ValueError),
+            ("1430-1434", ValueError),
+            ("1430 - 1434", ValueError),            
+            ("1430 - 1434  ", ValueError),            
         ]
 
         for input_str, expected in test_cases:
