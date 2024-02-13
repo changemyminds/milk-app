@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/changemyminds/milk-app/compare/v1.1.0...v1.1.1) (2024-02-13)
+
+
+### 🐛 Bugfix
+
+* **bug:** fixed the log time format ([d228724](https://github.com/changemyminds/milk-app/commit/d2287247efa1d955dabf0601455d3424945b485d))
+
 ## [1.1.0](https://github.com/changemyminds/milk-app/compare/v1.0.7...v1.1.0) (2024-02-13)
 
 
