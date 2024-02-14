@@ -2,6 +2,7 @@ from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.adapter.inbound.line_controller import linebot_bp
 from app.adapter.inbound.audit_scheduler import count_day_milk_job
+from app.config.env_config import env_config
 import logging
 
 log_format = '%(asctime)s.%(msecs)03dZ %(levelname)s [%(name)s] <%(thread)d> - %(filename)s:%(funcName)s():(%(lineno)d) - %(message)s'
@@ -17,5 +18,6 @@ app.register_blueprint(linebot_bp)
 # scheduler run
 logging.info("scheduler run")
 scheduler = BackgroundScheduler()
-scheduler.add_job(count_day_milk_job, 'cron', day='*', hour=0, minute=1)
+scheduler.add_job(count_day_milk_job, 'cron', day='*', hour=0,
+                  minute=1, timezone=env_config.TIMEZONE)
 scheduler.start()
