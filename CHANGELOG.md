@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/changemyminds/milk-app/compare/v1.1.2...v1.2.0) (2024-02-17)
+
+
+### ✨ New feature
+
+* **db:** added database migration via yoyo library ([ba600da](https://github.com/changemyminds/milk-app/commit/ba600da1d5a384a331601a28e2dc5e34ac068395))
+
 ## [1.1.2](https://github.com/changemyminds/milk-app/compare/v1.1.1...v1.1.2) (2024-02-14)
 
 
