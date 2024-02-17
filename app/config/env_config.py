@@ -14,6 +14,7 @@ class EnvConifg:
     POSTGRES_SERVER: str = os.getenv('POSTGRES_SERVER')
     POSTGRES_DB: str = os.getenv('POSTGRES_DB')
     TIMEZONE: str = os.getenv('TIMEZONE', 'UTC')
+    MIGRATIONS: str = os.getenv('MIGRATIONS')
 
     def get_db_connection(self):
         return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}/{self.POSTGRES_DB}"

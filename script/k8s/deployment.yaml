@@ -73,5 +73,10 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: milk-secret
-                  key: TIMEZONE                                
+                  key: TIMEZONE
+            - name: MIGRATIONS
+              valueFrom:
+                secretKeyRef:
+                  name: milk-secret
+                  key: MIGRATIONS                  
       restartPolicy: Always

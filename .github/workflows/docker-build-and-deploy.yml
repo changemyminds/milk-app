@@ -61,6 +61,7 @@ jobs:
           --from-literal=POSTGRES_SERVER="${{ secrets.POSTGRES_SERVER }}" \
           --from-literal=POSTGRES_DB="${{ secrets.POSTGRES_DB }}" \
           --from-literal=TIMEZONE="${{ secrets.TIMEZONE }}" \
+          --from-literal=MIGRATIONS="${{ secrets.MIGRATIONS }}" \
           --dry-run=client -o yaml | kubectl apply -f -
     
     - name: Deploy Application to Kubernetes
