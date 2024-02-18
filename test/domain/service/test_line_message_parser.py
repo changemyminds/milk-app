@@ -1,6 +1,6 @@
 import unittest
 
-from app.application.service.line_message_parser import LineMessageParser
+from app.domain.service.line_message_parser import LineMessageParser
 
 
 class TestLineMessageParser(unittest.TestCase):
