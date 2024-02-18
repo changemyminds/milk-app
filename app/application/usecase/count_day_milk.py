@@ -3,7 +3,7 @@ import logging
 from zoneinfo import ZoneInfo
 from pydantic import BaseModel
 from app.application.interface.message_notify import MessageNotify
-from app.application.interface.milk_repository import MilkRepository
+from app.application.interface.milk_port import MilkPort
 
 
 class CountDayMilkInput(BaseModel):
@@ -17,12 +17,12 @@ class CountDayMilkOutput(BaseModel):
 
 
 class CountDayMilkUseCase:
-    def __init__(self, milk_repository: MilkRepository, message_notify: MessageNotify):
-        self.milk_repository = milk_repository
+    def __init__(self, milk_port: MilkPort, message_notify: MessageNotify):
+        self.milk_port = milk_port
         self.message_notify = message_notify
 
     def execute(self, input: CountDayMilkInput) -> CountDayMilkOutput:         
-        milks = self.milk_repository.get_milks_range(input.previous_day, input.now_day)
+        milks = self.milk_port.get_milks_range(input.previous_day, input.now_day)
         total_cc = sum([milk.cc for milk in milks])
 
         # line notify

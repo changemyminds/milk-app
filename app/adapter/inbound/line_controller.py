@@ -2,16 +2,17 @@ import logging
 from flask import Blueprint, request
 from linebot import LineBotApi, WebhookHandler
 from linebot.models import TextSendMessage
+from app.application.usecase.delete_line_message import DeleteLineMessageInput
 from app.application.usecase.parse_line_message import ParseLineMessageInput, ParseLineMessageOutput
 from app.config.env_config import env_config
-from . import parse_line_message_usecase
+from . import parse_line_message_usecase, delete_line_message_usecase
 from typing import List, Optional
 from pydantic import BaseModel
 from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, UnsendEvent
 )
 
 linebot_bp = Blueprint('linebot_bp', __name__)
@@ -47,6 +48,20 @@ class LineMessageEvent(BaseModel):
     mode: str
 
 
+class Unsend(BaseModel):
+    message_id: str
+
+
+class LineUnsendEvent(BaseModel):
+    type: str
+    unsend: Unsend
+    webhook_event_id: str
+    delivery_context: DeliveryContext
+    timestamp: int
+    source: Source
+    mode: str
+
+
 @linebot_bp.route("/", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -70,9 +85,12 @@ def handle_message(event: LineMessageEvent):
     try:
         input = ParseLineMessageInput(
             timestamp=event.timestamp,
-            groupId=event.source.group_id,
-            userId=event.source.user_id,
-            text=event.message.text
+            message_id=event.message.id,
+            group_id=event.source.group_id,
+            user_id=event.source.user_id,
+            text=event.message.text,
+            type=event.message.type,
+            is_redelivery=event.delivery_context.is_redelivery
         )
         output: ParseLineMessageOutput = parse_line_message_usecase.execute(
             input)
@@ -80,4 +98,13 @@ def handle_message(event: LineMessageEvent):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(output.message))
     except Exception as e:
-        logging.warn(e)
+        logging.exception(e)
+
+
+@handler.add(UnsendEvent)
+def handle_unsend(event: LineUnsendEvent):
+    try:
+        input = DeleteLineMessageInput(message_id=event.unsend.message_id)
+        delete_line_message_usecase.execute(input)
+    except Exception as e:
+        logging.exception(e)
