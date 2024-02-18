@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.1](https://github.com/changemyminds/milk-app/compare/v1.2.0...v1.2.1) (2024-02-18)
+
+
+### ✨ New feature
+
+* add line unsend feature ([397e9a7](https://github.com/changemyminds/milk-app/commit/397e9a737be8b7cdf3e5a77d08e2d58585852963))
+
+
+### 🔨 Refactor code
+
+* move line_message_parser from  app service to domain service ([61bc986](https://github.com/changemyminds/milk-app/commit/61bc986070111ea30eeb3b97c919a4f05a2e3c18))
+
+
+### ⚙️ Chore
+
+* **cicd:** modified container and Makefile scripts ([c619d55](https://github.com/changemyminds/milk-app/commit/c619d55023b73e5b144c09cc57b2de58d4c29634))
+
 ## [1.2.0](https://github.com/changemyminds/milk-app/compare/v1.1.2...v1.2.0) (2024-02-17)
 
 
