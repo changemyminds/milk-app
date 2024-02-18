@@ -1,5 +1,6 @@
 IMAGE_NAME := milk-app
 COMPOSE_FILE := script/docker-compose.yml
+DOCKER_FILE := script/Dockerfile
 ENV_FILE := .env
 
 .PHONY: flask-run
@@ -8,7 +9,11 @@ flask-run:
 
 .PHONY: docker-build
 docker-build:
-	docker build --network=host -t $(IMAGE_NAME) -f script/Dockerfile .
+	@IMAGES=$$(docker images -f "dangling=true" -q); \
+	if [ -n "$$IMAGES" ]; then \
+		docker rmi -f $$IMAGES; \
+	fi
+	docker build --network=host -t $(IMAGE_NAME) -f $(DOCKER_FILE) .
 
 .PHONY: docker-run
 docker-run:
